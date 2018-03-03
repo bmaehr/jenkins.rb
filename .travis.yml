@@ -3,7 +3,6 @@ jdk:
   - openjdk7
   - openjdk8
   - oraclejdk8
-  - openjdk9
   - oraclejdk9
 rvm:
   - jruby-19mode
