@@ -1,8 +1,10 @@
 language: ruby
 jdk:
-  - openjdk6
   - openjdk7
-  - oraclejdk7
+  - openjdk8
+  - oraclejdk8
+  - openjdk9
+  - oraclejdk9
 rvm:
   - jruby-19mode
 script:
