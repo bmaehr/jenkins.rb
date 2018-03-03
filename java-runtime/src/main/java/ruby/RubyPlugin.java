@@ -99,6 +99,8 @@ public class RubyPlugin extends PluginImpl {
 
     /**
      * Registers an extension with the default ordiinal.
+     *
+ 	   * @param extension Extension
      */
 	public void addExtension(Object extension) {
         addExtension(extension,0);
@@ -106,11 +108,12 @@ public class RubyPlugin extends PluginImpl {
 
     /**
      * Registers an extension with this Ruby plugin so that it will be found later on
-     * <p/>
+     * 
      * This method is generally called from inside Ruby, as objects that implement
      * extension points register themselves.
      *
-     * @param extension
+     * @param extension Extension
+ 	   * @param ordinal Ordinal
      */
     public void addExtension(Object extension, double ordinal) {
         extensions.add(new ExtensionComponent(extension, ordinal));
@@ -130,6 +133,9 @@ public class RubyPlugin extends PluginImpl {
 
     /**
      * Loads the models.rb
+     *
+     * @return models.rb as String
+     * @throws IOException Exception
      */
     public String loadBootScript() throws IOException {
         File rb = new File(getLibPath(),"models.rb");
@@ -145,7 +151,7 @@ public class RubyPlugin extends PluginImpl {
 	 * The plugin will in turn delegate to its instance of Jenkins::Plugin
 	 * which can take action on the Ruby side.
 	 *
-	 * @throws Exception
+	 * @throws Exception Exception
 	 */
 	@Override
 	public void start() throws Exception {
@@ -166,6 +172,9 @@ public class RubyPlugin extends PluginImpl {
 
     /**
      * Gets the plugin that owns the container.
+     *
+     * @param r Ruby
+     * @return plugin that owns the container    
      */
     public static RubyPlugin from(Ruby r) {
         IRubyObject v = r.evalScriptlet("Jenkins::Plugin.instance.peer");
@@ -281,7 +290,7 @@ public class RubyPlugin extends PluginImpl {
 	 * The plugin will in turn delegate to its instance of Jenkins::Plugin
 	 * which can take action on the Ruby side
 	 *
-	 * @throws Exception
+	 * @throws Exception Exception
 	 */
 	@Override
 	public void stop() throws Exception {
@@ -296,6 +305,8 @@ public class RubyPlugin extends PluginImpl {
 
     /**
      * Returns a directory that stores all the Ruby scripts.
+     *
+     * @return  a directory that stores all the Ruby scripts
      */
     public File getScriptDir() {
         URL url = getWrapper().baseResourceURL;

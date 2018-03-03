@@ -22,13 +22,17 @@ class RubyPluginRuntimeResolver extends RubyRuntimeResolver {
 	public Ruby unmarshal(HierarchicalStreamReader reader, UnmarshallingContext context) {
 		String pluginid = reader.getAttribute("pluginid");
 		RubyPlugin plugin = (RubyPlugin) Jenkins.getInstance().getPlugin(pluginid);
-		return plugin.getScriptingContainer().getProvider().getRuntime();
+    if (plugin!=null) {
+        return plugin.getScriptingContainer().getProvider().getRuntime();
+    }
+    return null;
 	}
 
 	@Override
 	public void marshal(IRubyObject o, HierarchicalStreamWriter writer, MarshallingContext context) {
         RubyPlugin p = RubyPlugin.from(o.getRuntime());
-        if (p!=null)
-            writer.addAttribute("pluginid", p.getWrapper().getShortName());
+        if (p!=null) {
+            writer.addAttribute("pluginid", p.getWrapper().getShortName());          
+        }
 	}
 }
