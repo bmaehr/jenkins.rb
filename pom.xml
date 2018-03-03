@@ -6,6 +6,10 @@
     <version>3.5</version>
   </parent>
 
+  <properties>
+    <java.level>7</java.level>
+  </properties>
+  
   <artifactId>ruby-runtime-parent</artifactId>
   <version>0.20</version>
   <description>Hosts runtime for enabling pure-Ruby plugins</description>
